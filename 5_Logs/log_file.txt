@@ -1,0 +1,5 @@
+time="2019-09-30T00:44:31-03:00" level=info msg="Something Happened!!"
+time="2019-09-30T00:44:31-03:00" level=info msg="info level"
+time="2019-09-30T00:44:31-03:00" level=warning msg="warning level"
+time="2019-09-30T00:44:31-03:00" level=error msg="errror occured"
+time="2019-09-30T00:44:31-03:00" level=fatal msg="fatal error occured"
