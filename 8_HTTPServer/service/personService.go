@@ -1,25 +1,21 @@
 package service
 
 import (
+	dal "../dal"
 	model "../model"
 )
 
-var memoryData = []model.Person{}
-
 // AddPerson adds a new person
-func AddPerson(person model.Person) {
-	memoryData = append(memoryData, person)
+func AddPerson(person model.Person) string {
+	return dal.SetPerson(person)
 }
 
 // GetPerson returns a person from a specific index
-func GetPerson(index int64) *model.Person {
-	if index > 0 && index <= int64(len(memoryData)) {
-		return &memoryData[index-1]
-	}
-	return nil
+func GetPerson(key string) (dal.PersonDal, bool) {
+	return dal.GetPerson(key)
 }
 
 // GetPersons returns all persons
-func GetPersons() []model.Person {
-	return memoryData
+func GetPersons() []dal.PersonDal {
+	return dal.GetPersons()
 }

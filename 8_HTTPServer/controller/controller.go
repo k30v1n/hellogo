@@ -1,8 +1,6 @@
 package controller
 
 import (
-	"strconv"
-
 	"../model"
 	"../service"
 	"github.com/gin-gonic/gin"
@@ -12,22 +10,24 @@ import (
 func AddPerson(c *gin.Context) {
 	person := model.Person{}
 	err := c.BindJSON(&person)
-	service.AddPerson(person)
-	exception := ""
+	result := service.AddPerson(person)
 	if err != nil {
-		exception = err.Error()
-		c.JSON(500, gin.H{"exception": exception})
+		c.JSON(500, gin.H{"exception": err.Error()})
 	} else {
-		c.JSON(200, gin.H{"data": person})
+		c.JSON(200, gin.H{"data": result})
 	}
 }
 
 // GetPerson returns all people
 func GetPerson(c *gin.Context) {
-	index, _ := strconv.ParseInt(c.Params.ByName("index"), 10, 64)
-	person := service.GetPerson(index)
+	key := c.Params.ByName("key")
+	person, found := service.GetPerson(key)
 
-	c.JSON(200, gin.H{"data": person})
+	if found {
+		c.JSON(200, gin.H{"data": person})
+	} else {
+		c.JSON(200, gin.H{"data": nil})
+	}
 }
 
 // GetPersons gets all persons previous inserted

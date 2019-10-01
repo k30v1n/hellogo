@@ -11,7 +11,7 @@ func main() {
 	{
 		personGroup.POST("/person", controller.AddPerson)
 		personGroup.GET("/person", controller.GetPersons)
-		personGroup.GET("/person/:index", controller.GetPerson)
+		personGroup.GET("/person/:key", controller.GetPerson)
 	}
 	router.Use(LoggingMiddleware)
 	router.Run(":8080")
